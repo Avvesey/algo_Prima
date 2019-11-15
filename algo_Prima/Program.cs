@@ -87,7 +87,7 @@ namespace algo_Prima
                 int weight = Convert.ToInt32(lines[i+2]);
                 Edge Ed = new Edge(v1, v2, weight);
                 E.Add(Ed);
-                i += 2;
+                i += 2; 
             }
            
 
