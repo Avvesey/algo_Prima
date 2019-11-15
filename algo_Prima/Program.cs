@@ -6,7 +6,7 @@ using System.IO;
 namespace algo_Prima
 {
     class Program
-    {
+    { 
 
 
 
