@@ -1,6 +1,6 @@
 ﻿namespace algo_Prima
 {
-    internal class Edge
+    public class Edge
     {
         public int v1, v2;
 

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace algo_Prima
 {
-    class Program
-    { 
+     class Program
+    {
+        public static Stopwatch sw = new Stopwatch();
 
-
-
-        public static void algorithmByPrim(int numberV, List<Edge> E, List<Edge> MST)
+        static void algorithmByPrim(int numberV, List<Edge> E, List<Edge> MST)
         {
             //неиспользованные ребра
             List<Edge> notUsedE = new List<Edge>(E);
@@ -57,25 +57,33 @@ namespace algo_Prima
                 MST.Add(notUsedE[minE]);
                 notUsedE.RemoveAt(minE);
             }
-            foreach(Edge e in MST)
-            {
-                Console.WriteLine(e);
-            }
+           // foreach(Edge e in MST)
+           // {
+                //Console.WriteLine(e);
+           // }
 
 
             // Console.ReadKey();
         }
 
+
+        [STAThread]
         static void Main(string[] args)
         {
-
+            
+           
 
             List<Edge> MST = new List<Edge>(); // минимальное остовное дерево
 
             int N;
-            Console.WriteLine("введи число ребер ");
-            Console.WriteLine("заполните лист ");
-            string path = @"C:\Users\Аввесей\Desktop\pres\in2.txt";
+            
+            //string path = @"C:\Users\Аввесей\Desktop\pres\in2.txt";  // достать из папки на компе
+            // достает из файла проекта
+            
+             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Example\Test1.txt");
+            
+            
+           
             string[] lines = File.ReadAllLines(path);
             N = Convert.ToInt32(lines[0]);
             List<Edge> E = new List<Edge>(N); //сам граф
@@ -89,29 +97,20 @@ namespace algo_Prima
                 E.Add(Ed);
                 i += 2; 
             }
-           
 
-
-
-            /*  for (int i = 0; i < N; i++)
-              {
-
-                  int v1 = Convert.ToInt32(Console.ReadLine());
-                  int v2 = Convert.ToInt32(Console.ReadLine());
-                  int weight = Convert.ToInt32(Console.ReadLine());
-                  Edge Ed = new Edge(v1, v2, weight);
-
-                  E.Add(Ed);
-          }  */
-
+            
+            sw.Start();
             algorithmByPrim( N , E, MST);
-            Console.WriteLine("________________________________________________________________");
+            sw.Stop();
+            
 
-            foreach (Edge e in E)
+            foreach (Edge e in MST)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e.ToString());
+                Data.output.Add(e);
             }
-            Console.ReadKey();
+           // Console.ReadKey();
+            Form1.Runing();
         }
     }
 }
